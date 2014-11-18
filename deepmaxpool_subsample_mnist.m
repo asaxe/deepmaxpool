@@ -35,8 +35,8 @@ wNr=5;
 wNc=5;
 Nfilt = 8;
 
-mNr=5;
-mNc=5;
+mNr=3;
+mNc=3;
 %%
 w = randn(Nfilt,wNr*wNc);
 
@@ -124,6 +124,9 @@ if save_dataset
     ys = y(:,(batch-1)*Nbatch+1:batch*Nbatch);
     save(strcat(savefile,'_subset'),'xmu','ys');
 end
+
+%
+break
 
 %% Find best linear predictor, plot test/train error
 load mnist_train_subset
