@@ -3,7 +3,7 @@ clear all
 savefile = '~/datasets/mnist/mnist_test';
 
 addpath('~/datasets/mnist')
-xtmp = loadMNISTImages('/Users/asaxe/Documents/doctoralwork/rht/project/datasets/mnist/t10k-images-idx3-ubyte');
+xtmp = loadMNISTImages('~/datasets/mnist/t10k-images-idx3-ubyte');
 %xtmp = loadMNISTImages('~/datasets/mnist/train-images-idx3-ubyte');
 sh = @(a) reshape(a,28,28)
 xNr = round(sqrt(size(xtmp,1)));
