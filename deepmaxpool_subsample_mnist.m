@@ -1,4 +1,4 @@
-clear all
+%clear all
 
 savefile = '~/datasets/mnist/mnist_test';
 
@@ -38,7 +38,7 @@ Nfilt = 8;
 mNr=3;
 mNc=3;
 %%
-w = randn(Nfilt,wNr*wNc);
+%w = randn(Nfilt,wNr*wNc);
 
 for i = 1:Nfilt
     
