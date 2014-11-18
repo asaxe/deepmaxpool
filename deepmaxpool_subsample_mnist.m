@@ -1,8 +1,10 @@
 clear all
 
-addpath('../../doctoralwork/rht/project/datasets/mnist')
+savefile = '~/datasets/mnist/mnist_train';
+
+addpath('~/datasets/mnist')
 %xtmp = loadMNISTImages('/Users/asaxe/Documents/doctoralwork/rht/project/datasets/mnist/t10k-images-idx3-ubyte');
-xtmp = loadMNISTImages('/Users/asaxe/Documents/doctoralwork/rht/project/datasets/mnist/train-images-idx3-ubyte');
+xtmp = loadMNISTImages('~/datasets/mnist/train-images-idx3-ubyte');
 sh = @(a) reshape(a,28,28)
 xNr = round(sqrt(size(xtmp,1)));
 xNc = round(sqrt(size(xtmp,1)));
@@ -16,8 +18,8 @@ end
 clear xtmp;
 %%
 
-%ytmp = loadMNISTLabels('/Users/asaxe/Documents/doctoralwork/rht/project/datasets/mnist/t10k-labels-idx1-ubyte');
-ytmp = loadMNISTLabels('/Users/asaxe/Documents/doctoralwork/rht/project/datasets/mnist/train-labels-idx1-ubyte');
+%ytmp = loadMNISTLabels('~/datasets/mnist/t10k-labels-idx1-ubyte');
+ytmp = loadMNISTLabels('~/datasets/mnist/train-labels-idx1-ubyte');
 ytmp(ytmp==0) = 10;
 
 y = zeros(10,P);
@@ -113,7 +115,7 @@ end %/batch
 so = y*y';
 
 %%
-save_dataset = false;
+save_dataset = true;
 if save_dataset
     save(strcat(savefile,'_corr'),'sio','si','so','wNc','wNr','xNc','xNr','w','mNr','mNc','Np','Nfilt','P');
     ys = y(:,(batch-1)*Nbatch+1:batch*Nbatch);
