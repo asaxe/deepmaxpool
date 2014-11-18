@@ -1,10 +1,10 @@
 clear all
 
-savefile = '~/datasets/mnist/mnist_train';
+savefile = '~/datasets/mnist/mnist_test';
 
 addpath('~/datasets/mnist')
-%xtmp = loadMNISTImages('/Users/asaxe/Documents/doctoralwork/rht/project/datasets/mnist/t10k-images-idx3-ubyte');
-xtmp = loadMNISTImages('~/datasets/mnist/train-images-idx3-ubyte');
+xtmp = loadMNISTImages('/Users/asaxe/Documents/doctoralwork/rht/project/datasets/mnist/t10k-images-idx3-ubyte');
+%xtmp = loadMNISTImages('~/datasets/mnist/train-images-idx3-ubyte');
 sh = @(a) reshape(a,28,28)
 xNr = round(sqrt(size(xtmp,1)));
 xNc = round(sqrt(size(xtmp,1)));
@@ -18,8 +18,8 @@ end
 clear xtmp;
 %%
 
-%ytmp = loadMNISTLabels('~/datasets/mnist/t10k-labels-idx1-ubyte');
-ytmp = loadMNISTLabels('~/datasets/mnist/train-labels-idx1-ubyte');
+ytmp = loadMNISTLabels('~/datasets/mnist/t10k-labels-idx1-ubyte');
+%ytmp = loadMNISTLabels('~/datasets/mnist/train-labels-idx1-ubyte');
 ytmp(ytmp==0) = 10;
 
 y = zeros(10,P);
