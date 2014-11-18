@@ -91,7 +91,10 @@ for batch = 1:P/Nbatch
     ind = 1;
     % Compute convolutions and maxes
     for mu = (batch-1)*Nbatch+1:batch*Nbatch
-        mu
+        
+        if mod(mu,10)==0
+            mu
+        end
 
 
         %Conv
