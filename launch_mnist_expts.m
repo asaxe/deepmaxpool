@@ -22,5 +22,10 @@ for wN = wNs
     end
 end
 
-
-run_blam2(theta, zeros(size(theta,1),1),expt_nm, 'run_model')
+if ~isempty(strfind(getenv('HOSTNAME'),'sherlock'))
+	launch_fn = @run_sherlock;
+ else
+	  launch_fn = @run_blam2;
+end
+launch_fn(theta, zeros(size(theta,1),1),expt_nm, 'run_model')
+	 
