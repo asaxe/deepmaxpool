@@ -41,5 +41,7 @@ params_tr.w = [];
 params_ts.w = [];
 params_ts.M = [];
 params_ts.M = [];
+params_tr.sh = [];
+params_ts.sh = [];
 
 save(sprintf('~/deepmaxpool/results/expt%d/l2_w%d_f%d_m%d.mat',exptnum,params_tr.wNr,params_tr.Nfilt,params_tr.mNr),'tr_error','ts_error','params_tr','params_ts','lambdas','best_ts','best_lambda');

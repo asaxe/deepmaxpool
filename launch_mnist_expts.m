@@ -1,6 +1,6 @@
 function launch_mnist_expts
 
-expt_nm = 1;
+expt_nm = 2;
 mkdir(sprintf('~/deepmaxpool/results/expt%d',expt_nm))
 
 wNs = 2:10;
