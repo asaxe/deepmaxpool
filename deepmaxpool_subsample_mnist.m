@@ -138,13 +138,15 @@ xmu_ts = xmu;
 y_ts = y;
 clear xmu y
 
-lambdas = logspace(-1,5,10);
-lambdas = 10^-1;
+lambdas = logspace(-1,1,10);
+%lambdas = 2;
 ind = 1;
 for lambda = lambdas
     ind
     
-    W = sio/(si + lambda*eye(size(si)));
+    g = (ones(size(si))-eye(size(si)))*lambda + eye(size(si));
+    
+    W = sio/(g.*si); %diag(diag(si)));eye(size(si)));%lambda*diag(diag(si))); %
 
     % Compute error on subset of data
 
@@ -166,7 +168,7 @@ for lambda = lambdas
     ind = ind + 1;
 end
 %%
-semilogx(lambdas,train,lambdas,test,'linewidth',2)
+plot(lambdas,1-train,lambdas,1-test,'linewidth',2)
 legend('train','test')
 
 %% Try SVD breakdown

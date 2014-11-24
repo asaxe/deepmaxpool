@@ -64,6 +64,8 @@ Nbatch = 10000;
 params.Nbatch = Nbatch;
 for batch = 1:P/Nbatch
 
+    batch
+
     xmu = zeros(size(M,2)*Nfilt,Nbatch);
     ind = 1;
     % Compute convolutions and maxes
@@ -77,11 +79,13 @@ for batch = 1:P/Nbatch
 
         %Conv
         xc = im2col(padarray(x(:,:,mu),[ceil((wNr-1)/2) ceil((wNc-1)/2)]),[wNr wNc]);      
-        xw = w*xc;
-
-        % Max
+        
         for f = 1:Nfilt
-            [m,I] = max(reshape(xw(f,M),size(M)));
+            xw = w(f,:)*xc;
+
+            % Max
+
+            [m,I] = max(reshape(xw(M),size(M)));
             max_winners = M(sub2ind(size(M),I,1:length(I)));
             xmu((f-1)*Np*wNr*wNc+1:f*Np*wNr*wNc,ind) = reshape(xc(:,max_winners),Np*wNr*wNc,1);
         end

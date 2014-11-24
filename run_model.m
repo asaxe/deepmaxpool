@@ -14,6 +14,7 @@ randn('seed',1);
 params.w = randn(params.Nfilt,params.wNr*params.wNc);
 
 %% Train
+sprintf('Training')
 params_tr = params;
 params_tr.dataset = 'mnist_train';
 [x, y, params_tr] = load_dataset(params_tr);
@@ -21,6 +22,7 @@ params_tr.dataset = 'mnist_train';
 clear x y 
 
 %% Test
+sprintf('Testing')
 params_ts = params;
 params_ts.dataset = 'mnist_test';
 [x, y, params_ts] = load_dataset(params_ts);
@@ -28,10 +30,12 @@ params_ts.dataset = 'mnist_test';
 clear x y params sio_ts si_ts so_ts
 
 %% Classify
+sprintf('Crossvalidating')
 [tr_error, ts_error, lambdas] = sweep_L2(sio_tr, si_tr, xmu_tr, ...
                                          ymu_tr, xmu_ts, ymu_ts);
 
 %% Save
+sprintf('Saving')
 [best_ts,I] = min(ts_error);
 best_ts
 toc
