@@ -25,6 +25,7 @@ clear x y
 sprintf('Testing')
 params_ts = params;
 params_ts.dataset = 'mnist_test';
+params_ts.compute_corrs = false;
 [x, y, params_ts] = load_dataset(params_ts);
 [sio_ts, si_ts, so_ts, xmu_ts, ymu_ts, params_ts] = compute_2D_maxpool_corrs(x, y, params_ts);
 clear x y params sio_ts si_ts so_ts
