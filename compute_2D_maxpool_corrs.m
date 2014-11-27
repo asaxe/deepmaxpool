@@ -6,6 +6,11 @@ xNr = params.xNr;
 xNc = params.xNc;
 sh = params.sh;
 
+sio = [];
+si = [];
+so = [];
+compute_corrs = ~isfield(params,'compute_corrs') || params.compute_corrs;
+
 %% Set up filtering parameters
 
 wNr=params.wNr;
@@ -56,14 +61,15 @@ end
 
 %% Compute input-output and input correlations
 
-
-si = zeros(Np*wNr*wNc*Nfilt,Np*wNr*wNc*Nfilt);
-sio = zeros(size(y,1),Np*wNr*wNc*Nfilt);
+if compute_corrs
+    si = zeros(Np*wNr*wNc*Nfilt,Np*wNr*wNc*Nfilt);
+    sio = zeros(size(y,1),Np*wNr*wNc*Nfilt);
+end
 
 Nbatch = 10000;
 params.Nbatch = Nbatch;
 for batch = 1:P/Nbatch
-
+    tic
     batch
 
     xmu = zeros(size(M,2)*Nfilt,Nbatch);
@@ -91,12 +97,17 @@ for batch = 1:P/Nbatch
         end
 
         ind = ind + 1;
-
+        toc
     end %/mu
-    si = si + xmu*xmu';
     ymu = y(:,(batch-1)*Nbatch+1:batch*Nbatch);
-    sio = sio + ymu*xmu';
-
+    
+    if compute_corrs
+        si = si + xmu*xmu';
+        sio = sio + ymu*xmu';
+    end
+    toc
 end %/batch
-so = y*y';
+if compute_corrs
+    so = y*y';
+end
 
