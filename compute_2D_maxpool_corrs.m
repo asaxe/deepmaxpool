@@ -97,7 +97,7 @@ for batch = 1:P/Nbatch
         end
 
         ind = ind + 1;
-        toc
+        
     end %/mu
     ymu = y(:,(batch-1)*Nbatch+1:batch*Nbatch);
     

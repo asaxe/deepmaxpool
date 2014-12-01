@@ -1,11 +1,11 @@
 function launch_mnist_expts
 
-expt_nm = 3;
+expt_nm = 6;
 mkdir(sprintf('~/deepmaxpool/results/expt%d',expt_nm))
 
 wNs = 5:10;
 mNs = 5:10;
-maxsz = 20000;
+maxsz = 55000;
 
 i = 1;
 for wN = wNs
@@ -22,7 +22,7 @@ for wN = wNs
     end
 end
 
-if ~isempty(strfind(getenv('HOSTNAME'),'sherlock'))
+if ~isempty(strfind(getenv('HOSTNAME'),'sh'))
 	launch_fn = @run_sherlock;
  else
 	  launch_fn = @run_blam2;
