@@ -1,6 +1,6 @@
 function launch_pca_mnist_expts
 
-expt_nm = 6;
+expt_nm = 7;
 mkdir(sprintf('~/deepmaxpool/results/expt%d',expt_nm))
 
 wNs = 5:10;
@@ -11,13 +11,16 @@ i = 1;
 for wN = wNs
     for mN = mNs
       
-        % Choose largest Nf that keeps size below maxsz x maxsz
+        for Npc = linspace(5,wN^2,10);
+        
+            % Choose largest Nf that keeps size below maxsz x maxsz
 
-        Nf = floor(maxsz/wN.^2/floor(28/mN).^2);
-        if Nf >= 1
+            Nf = floor(maxsz/Npc/floor(28/mN).^2);
+            if Nf >= 1
 
-            theta(i,:) = [wN Nf mN];
-            i = i + 1;
+                theta(i,:) = [wN Nf mN Npc];
+                i = i + 1;
+            end
         end
     end
 end
