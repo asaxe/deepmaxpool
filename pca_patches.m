@@ -7,7 +7,7 @@ wNc = params.wNc;
 
 C = zeros(wNr*wNc,wNr*wNc);
 for r = 1:xNr-wNr+1
-    r
+    
     for c = 1:xNc-wNc+1
         patches = squeeze(reshape(x(r:r+wNr-1,c:c+wNc-1,:),wNr*wNc,1,P));
         C = C + patches*patches';

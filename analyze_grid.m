@@ -1,5 +1,5 @@
 clear
-load mnist_grid
+load mnist_grid_larger
 
 wNs = unique(res(:,1));
 mNs = unique(res(:,3));
@@ -22,6 +22,6 @@ for w = 1:length(wNs)
     end
 end
 
-imagesc((min_ts))
+surf(min_ts)
 xlabel('w')
 ylabel('m')
