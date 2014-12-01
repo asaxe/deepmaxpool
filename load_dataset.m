@@ -36,7 +36,7 @@ params.xNr = xNr;
 params.xNc = xNc;
 params.P = P;
 
-y = -ones(max(ytmp(:)),P)/10;
+y = zeros(max(ytmp(:)),P);
 for i = 1:P
     y(ytmp(i),i) = 1;
 end

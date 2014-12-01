@@ -13,20 +13,21 @@ params.mNc=theta(3);
 params.Npc = theta(4);
 
 randn('seed',1);
-params.w = randn(params.Nfilt,params.wNr*params.wNc);
+params.w = randn(params.Nfilt,params.Npc);
 
 %% Train
 sprintf('Training')
 params_tr = params;
 params_tr.dataset = 'mnist_train';
 [x, y, params_tr] = load_dataset(params_tr);
-params_tr = pca_patch(x, params_tr);
+params_tr = pca_patches(x, params_tr);
 [sio_tr, si_tr, so_tr, xmu_tr, ymu_tr, params_tr] = compute_2D_maxpool_corrs(x, y, params_tr);
 clear x y 
 
 %% Test
 sprintf('Testing')
 params_ts = params;
+params_ts.V = params_tr.V;
 params_ts.dataset = 'mnist_test';
 params_ts.compute_corrs = false;
 [x, y, params_ts] = load_dataset(params_ts);
