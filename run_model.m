@@ -35,8 +35,9 @@ clear x y params sio_ts si_ts so_ts
 
 %% Classify
 sprintf('Crossvalidating')
-[tr_error, ts_error, lambdas] = sweep_L2(sio_tr, si_tr, xmu_tr, ...
-                                         ymu_tr, xmu_ts, ymu_ts);
+sweep_L2_script
+%[tr_error, ts_error, lambdas] = sweep_L2(sio_tr, si_tr, xmu_tr, ...
+%                                         ymu_tr, xmu_ts, ymu_ts);
 
 %% Save
 sprintf('Saving')
@@ -51,5 +52,7 @@ params_ts.M = [];
 params_ts.M = [];
 params_tr.sh = [];
 params_ts.sh = [];
+
+params_tr.N = N;
 
 save(sprintf('~/deepmaxpool/results/expt%d/l2_w%d_f%d_m%d.mat',exptnum,params_tr.wNr,params_tr.Nfilt,params_tr.mNr),'tr_error','ts_error','params_tr','params_ts','lambdas','best_ts','best_lambda');
