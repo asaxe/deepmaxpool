@@ -25,7 +25,7 @@ xNr = round(sqrt(size(xtmp,1)));
 xNc = round(sqrt(size(xtmp,1)));
 P = size(xtmp,2);
 x = zeros(xNr,xNc,P);
-avg = mean(xtmp,2);
+avg = 0;%mean(xtmp,2);
 for i = 1:size(xtmp,2)
     x(:,:,i) = sh(xtmp(:,i)-avg);
 end

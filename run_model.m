@@ -10,6 +10,8 @@ params.Nfilt = theta(2);
 params.mNr=theta(3);
 params.mNc=theta(3);
 
+params.Npc = theta(4);
+
 randn('seed',1);
 params.w = randn(params.Nfilt,params.wNr*params.wNc);
 
@@ -18,6 +20,7 @@ sprintf('Training')
 params_tr = params;
 params_tr.dataset = 'mnist_train';
 [x, y, params_tr] = load_dataset(params_tr);
+params_tr = pca_patch(x, params_tr);
 [sio_tr, si_tr, so_tr, xmu_tr, ymu_tr, params_tr] = compute_2D_maxpool_corrs(x, y, params_tr);
 clear x y 
 

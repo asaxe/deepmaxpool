@@ -20,6 +20,9 @@ Nfilt = params.Nfilt;
 mNr=params.mNr;
 mNc=params.mNc;
 
+Npc = params.Npc;
+V = params.V(:,1:Npc);
+
 w = params.w;
 
 %% Compute and store pooling regions
@@ -39,31 +42,16 @@ for c = 1:mNc:xNc+1-mNc
         M = [M  sub2ind([xNr xNc],r+por-1,c+poc-1)'];
     end
 end
-Np = size(M,2);
+Npool = size(M,2);
 
-params.Np = Np;
+params.Npool = Npool;
 params.M = M;
-
-%% Plot pooling regions
-plot_pool_reg = false;
-if plot_pool_reg
-     for i = 1:100;
-         tmp = zeros(1,xNr*xNc);
-         tmp(M(:,i))=1;
-        imagesc(sh(tmp))
-        pause
-     end
-end
-
-
-
-
 
 %% Compute input-output and input correlations
 
 if compute_corrs
-    si = zeros(Np*wNr*wNc*Nfilt,Np*wNr*wNc*Nfilt);
-    sio = zeros(size(y,1),Np*wNr*wNc*Nfilt);
+    si = zeros(Npool*Npc*Nfilt,Npool*Npc*Nfilt);
+    sio = zeros(size(y,1),Npool*Npc*Nfilt);
 end
 
 Nbatch = 10000;
@@ -84,7 +72,7 @@ for batch = 1:P/Nbatch
 
 
         %Conv
-        xc = im2col(padarray(x(:,:,mu),[ceil((wNr-1)/2) ceil((wNc-1)/2)]),[wNr wNc]);      
+        xc = V'*im2col(padarray(x(:,:,mu),[ceil((wNr-1)/2) ceil((wNc-1)/2)]),[wNr wNc]);      
         
         for f = 1:Nfilt
             xw = w(f,:)*xc;
@@ -93,7 +81,7 @@ for batch = 1:P/Nbatch
 
             [m,I] = max(reshape(xw(M),size(M)));
             max_winners = M(sub2ind(size(M),I,1:length(I)));
-            xmu((f-1)*Np*wNr*wNc+1:f*Np*wNr*wNc,ind) = reshape(xc(:,max_winners),Np*wNr*wNc,1);
+            xmu((f-1)*Npool*Npc+1:f*Npool*Npc,ind) = reshape(xc(:,max_winners),Npool*Npc,1);
         end
 
         ind = ind + 1;
