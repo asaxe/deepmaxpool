@@ -5,13 +5,13 @@ mkdir(sprintf('~/deepmaxpool/results/expt%d',expt_nm))
 
 wNs = 5:10;
 mNs = 5:10;
-maxsz = 55000;
+maxsz = 20000;
 
 i = 1;
 for wN = wNs
     for mN = mNs
       
-        for Npc = linspace(5,wN^2,10);
+        for Npc = floor(linspace(5,wN^2,10));
         
             % Choose largest Nf that keeps size below maxsz x maxsz
 
