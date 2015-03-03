@@ -53,6 +53,7 @@ params_ts.M = [];
 params_ts.M = [];
 params_tr.sh = [];
 params_ts.sh = [];
+params_tr.V = [];
 
 params_tr.N = N;
 
